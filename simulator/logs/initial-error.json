@@ -1,0 +1,979 @@
+{
+  "scenario": "initial-error",
+  "fixture": {
+    "command_tail": "",
+    "entries": []
+  },
+  "assertions": {
+    "terminated": true,
+    "has_dta_events": true,
+    "has_record_snapshots": true,
+    "expected_names_visible": true,
+    "memory_fully_classified": true,
+    "record_capacity_behavior": true
+  },
+  "instructions": 285,
+  "termination_code": 0,
+  "coverage": {
+    "static_instruction_starts": 790,
+    "executed_instruction_starts": 34,
+    "unexecuted_instruction_starts": 756,
+    "percent": 4.3,
+    "unexecuted_ranges": [
+      [
+        "06FB",
+        "07A8"
+      ],
+      [
+        "07AD",
+        "0803"
+      ],
+      [
+        "0808",
+        "0887"
+      ],
+      [
+        "088C",
+        "08DA"
+      ],
+      [
+        "08DF",
+        "096F"
+      ],
+      [
+        "0974",
+        "09E8"
+      ],
+      [
+        "09EE",
+        "0A7E"
+      ],
+      [
+        "0A83",
+        "0B85"
+      ],
+      [
+        "0BA9",
+        "0BA9"
+      ],
+      [
+        "0BB2",
+        "0C0F"
+      ],
+      [
+        "0C14",
+        "0C1A"
+      ],
+      [
+        "0C1F",
+        "0C32"
+      ],
+      [
+        "0C37",
+        "0C41"
+      ],
+      [
+        "0C46",
+        "0C64"
+      ],
+      [
+        "0C69",
+        "0C6B"
+      ],
+      [
+        "0C70",
+        "0CE4"
+      ],
+      [
+        "0CE9",
+        "0DC7"
+      ]
+    ],
+    "conditional_branches": {
+      "total": 73,
+      "covered": 7,
+      "both_edges": 1
+    }
+  },
+  "memory_coverage": {
+    "accessed_addresses": 30,
+    "regions": {
+      "com_stack": 4,
+      "static_data_or_workspace": 26
+    },
+    "unmapped_accesses": [],
+    "addresses": {
+      "01D0": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D1": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D2": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D3": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D4": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D5": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D6": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D7": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D8": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01D9": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01DA": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01DB": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01DC": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01DD": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01DE": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01DF": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E0": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E1": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E2": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E3": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E4": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E5": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E6": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E7": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E8": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "01E9": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "FFFA": {
+        "read": 26,
+        "write": 26,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0DD0",
+          "0DD5"
+        ]
+      },
+      "FFFB": {
+        "read": 26,
+        "write": 26,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0DD0",
+          "0DD5"
+        ]
+      },
+      "FFFC": {
+        "read": 1,
+        "write": 1,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0BAC",
+          "0DDA"
+        ]
+      },
+      "FFFD": {
+        "read": 1,
+        "write": 1,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0BAC",
+          "0DDA"
+        ]
+      }
+    },
+    "service_addresses": {}
+  },
+  "output": "Invalid Drive specified.\r\n",
+  "final_sorted_records": [],
+  "event_counts": {
+    "bios": 26,
+    "dos": 1,
+    "instruction": 1,
+    "output": 26,
+    "terminate": 1
+  },
+  "events": [
+    {
+      "kind": "instruction",
+      "address": "06F2",
+      "size": 2,
+      "regs": {
+        "ax": 255,
+        "bx": 0,
+        "cx": 0,
+        "dx": 0,
+        "si": 0,
+        "di": 0,
+        "ip": 1778,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 73,
+      "regs": {
+        "ax": 3657,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 465,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 73
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 110,
+      "regs": {
+        "ax": 3694,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 466,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 110
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 118,
+      "regs": {
+        "ax": 3702,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 467,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 118
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 97,
+      "regs": {
+        "ax": 3681,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 468,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 97
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 108,
+      "regs": {
+        "ax": 3692,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 469,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 108
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 105,
+      "regs": {
+        "ax": 3689,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 470,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 105
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 100,
+      "regs": {
+        "ax": 3684,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 471,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 100
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 32,
+      "regs": {
+        "ax": 3616,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 472,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 32
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 68,
+      "regs": {
+        "ax": 3652,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 473,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 68
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 114,
+      "regs": {
+        "ax": 3698,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 474,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 114
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 105,
+      "regs": {
+        "ax": 3689,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 475,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 105
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 118,
+      "regs": {
+        "ax": 3702,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 476,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 118
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 101,
+      "regs": {
+        "ax": 3685,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 477,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 101
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 32,
+      "regs": {
+        "ax": 3616,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 478,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 32
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 115,
+      "regs": {
+        "ax": 3699,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 479,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 115
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 112,
+      "regs": {
+        "ax": 3696,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 480,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 112
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 101,
+      "regs": {
+        "ax": 3685,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 481,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 101
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 99,
+      "regs": {
+        "ax": 3683,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 482,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 99
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 105,
+      "regs": {
+        "ax": 3689,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 483,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 105
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 102,
+      "regs": {
+        "ax": 3686,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 484,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 102
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 105,
+      "regs": {
+        "ax": 3689,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 485,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 105
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 101,
+      "regs": {
+        "ax": 3685,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 486,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 101
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 100,
+      "regs": {
+        "ax": 3684,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 487,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 100
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 46,
+      "regs": {
+        "ax": 3630,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 488,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 46
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 13,
+      "regs": {
+        "ax": 3597,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 489,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 13
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 10,
+      "regs": {
+        "ax": 3594,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 490,
+        "di": 0,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 10
+    },
+    {
+      "kind": "dos",
+      "site": "09EC",
+      "ah": 0,
+      "al": 0,
+      "regs": {
+        "ax": 0,
+        "bx": 7,
+        "cx": 0,
+        "dx": 0,
+        "si": 490,
+        "di": 0,
+        "ip": 2542,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "terminate",
+      "code": 0
+    }
+  ]
+}

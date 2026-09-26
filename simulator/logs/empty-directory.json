@@ -1,0 +1,1986 @@
+{
+  "scenario": "empty-directory",
+  "fixture": {
+    "command_tail": "",
+    "entries": []
+  },
+  "assertions": {
+    "terminated": true,
+    "has_dta_events": true,
+    "has_record_snapshots": true,
+    "expected_names_visible": true,
+    "memory_fully_classified": true,
+    "record_capacity_behavior": true
+  },
+  "instructions": 461,
+  "termination_code": 0,
+  "coverage": {
+    "static_instruction_starts": 790,
+    "executed_instruction_starts": 202,
+    "unexecuted_instruction_starts": 588,
+    "percent": 25.57,
+    "unexecuted_ranges": [
+      [
+        "06F6",
+        "06F8"
+      ],
+      [
+        "07B5",
+        "07B8"
+      ],
+      [
+        "07BD",
+        "07CC"
+      ],
+      [
+        "07FE",
+        "0801"
+      ],
+      [
+        "080A",
+        "081F"
+      ],
+      [
+        "0826",
+        "086A"
+      ],
+      [
+        "0878",
+        "0887"
+      ],
+      [
+        "088C",
+        "0891"
+      ],
+      [
+        "08BB",
+        "08D3"
+      ],
+      [
+        "08F4",
+        "0926"
+      ],
+      [
+        "0961",
+        "096F"
+      ],
+      [
+        "0974",
+        "09E8"
+      ],
+      [
+        "09EE",
+        "0A7E"
+      ],
+      [
+        "0A83",
+        "0B85"
+      ],
+      [
+        "0BB2",
+        "0C0F"
+      ],
+      [
+        "0C14",
+        "0C1A"
+      ],
+      [
+        "0C1F",
+        "0C32"
+      ],
+      [
+        "0C37",
+        "0C41"
+      ],
+      [
+        "0C46",
+        "0C64"
+      ],
+      [
+        "0C69",
+        "0C6B"
+      ],
+      [
+        "0C70",
+        "0CE4"
+      ],
+      [
+        "0CE9",
+        "0DC7"
+      ]
+    ],
+    "conditional_branches": {
+      "total": 73,
+      "covered": 22,
+      "both_edges": 4
+    }
+  },
+  "memory_coverage": {
+    "accessed_addresses": 104,
+    "regions": {
+      "buffers_tables_or_static_data": 41,
+      "com_stack": 8,
+      "program_dta": 1,
+      "psp": 3,
+      "psp_command_tail": 2,
+      "runtime_variables": 10,
+      "static_data_or_workspace": 39
+    },
+    "unmapped_accesses": [],
+    "addresses": {
+      "0006": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "psp"
+        ],
+        "sites": [
+          "0721"
+        ]
+      },
+      "0007": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "psp"
+        ],
+        "sites": [
+          "0721"
+        ]
+      },
+      "005C": {
+        "read": 3,
+        "write": 0,
+        "regions": [
+          "psp"
+        ],
+        "sites": [
+          "0771",
+          "07D7",
+          "0803"
+        ]
+      },
+      "0080": {
+        "read": 2,
+        "write": 0,
+        "regions": [
+          "psp_command_tail"
+        ],
+        "sites": [
+          "0748",
+          "08DA"
+        ]
+      },
+      "0081": {
+        "read": 3,
+        "write": 1,
+        "regions": [
+          "psp_command_tail"
+        ],
+        "sites": [
+          "074B",
+          "07F7",
+          "0821",
+          "0871"
+        ]
+      },
+      "0110": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0111": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0112": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0113": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0114": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0115": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0116": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0117": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0118": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0119": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "011A": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "011B": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "011C": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "011D": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "011E": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "011F": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0120": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0121": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "0122": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0DC9"
+        ]
+      },
+      "021B": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "021C": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "021D": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "021E": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "021F": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "0220": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "0221": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "0222": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "0223": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "0950"
+        ]
+      },
+      "02A0": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A1": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A2": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A3": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A4": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A5": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A6": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A7": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A8": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02A9": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "02AA": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "static_data_or_workspace"
+        ],
+        "sites": [
+          "07CE"
+        ]
+      },
+      "051D": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "073E"
+        ]
+      },
+      "051E": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "073E"
+        ]
+      },
+      "051F": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "0738"
+        ]
+      },
+      "0520": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "0738"
+        ]
+      },
+      "0525": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "0715"
+        ]
+      },
+      "0526": {
+        "read": 1,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "074F",
+          "075A"
+        ]
+      },
+      "0527": {
+        "read": 1,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "074F",
+          "075A"
+        ]
+      },
+      "0528": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "075F"
+        ]
+      },
+      "0529": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "0756"
+        ]
+      },
+      "052A": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "runtime_variables"
+        ],
+        "sites": [
+          "0756"
+        ]
+      },
+      "054A": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "program_dta"
+        ],
+        "sites": [
+          "07A8"
+        ]
+      },
+      "05B7": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0731"
+        ]
+      },
+      "05B8": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0731"
+        ]
+      },
+      "05B9": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "072E"
+        ]
+      },
+      "05BA": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "072E"
+        ]
+      },
+      "062A": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0768"
+        ]
+      },
+      "062B": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0768"
+        ]
+      },
+      "062C": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "076B"
+        ]
+      },
+      "062D": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "076B"
+        ]
+      },
+      "062E": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "070B"
+        ]
+      },
+      "0633": {
+        "read": 1,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "07EC",
+          "08D7"
+        ]
+      },
+      "0634": {
+        "read": 2,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "07E9",
+          "08EC"
+        ]
+      },
+      "0635": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "07E9"
+        ]
+      },
+      "0675": {
+        "read": 2,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0783",
+          "0946",
+          "0950"
+        ]
+      },
+      "0676": {
+        "read": 2,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0946",
+          "0950"
+        ]
+      },
+      "0677": {
+        "read": 2,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0946",
+          "0950"
+        ]
+      },
+      "0678": {
+        "read": 2,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08EC",
+          "0946",
+          "0950"
+        ]
+      },
+      "0679": {
+        "read": 2,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08EE",
+          "0946",
+          "0950"
+        ]
+      },
+      "067A": {
+        "read": 2,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0927",
+          "0946",
+          "0950"
+        ]
+      },
+      "067B": {
+        "read": 2,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "092B",
+          "0946",
+          "0950"
+        ]
+      },
+      "067C": {
+        "read": 2,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "092F",
+          "0946",
+          "0950"
+        ]
+      },
+      "067D": {
+        "read": 2,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0933",
+          "0946",
+          "0950"
+        ]
+      },
+      "06B8": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0936"
+        ]
+      },
+      "06B9": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0936"
+        ]
+      },
+      "06BE": {
+        "read": 0,
+        "write": 1,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "0780"
+        ]
+      },
+      "06C7": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08A1"
+        ]
+      },
+      "06C8": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06C9": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06CA": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06CB": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06CC": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06CD": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06CE": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D1": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AA"
+        ]
+      },
+      "06D2": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D3": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D4": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D5": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D6": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D7": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D8": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "06D9": {
+        "read": 1,
+        "write": 0,
+        "regions": [
+          "buffers_tables_or_static_data"
+        ],
+        "sites": [
+          "08AF"
+        ]
+      },
+      "FFF6": {
+        "read": 2,
+        "write": 2,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0896",
+          "08B3"
+        ]
+      },
+      "FFF7": {
+        "read": 2,
+        "write": 2,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0896",
+          "08B3"
+        ]
+      },
+      "FFF8": {
+        "read": 2,
+        "write": 2,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0895",
+          "08B4"
+        ]
+      },
+      "FFF9": {
+        "read": 2,
+        "write": 2,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0895",
+          "08B4"
+        ]
+      },
+      "FFFA": {
+        "read": 21,
+        "write": 21,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0894",
+          "08B5",
+          "0DD0",
+          "0DD5"
+        ]
+      },
+      "FFFB": {
+        "read": 21,
+        "write": 21,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "0894",
+          "08B5",
+          "0DD0",
+          "0DD5"
+        ]
+      },
+      "FFFC": {
+        "read": 3,
+        "write": 3,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "07F9",
+          "0873",
+          "08B6",
+          "0BAC",
+          "0DDA"
+        ]
+      },
+      "FFFD": {
+        "read": 3,
+        "write": 3,
+        "regions": [
+          "com_stack"
+        ],
+        "sites": [
+          "07F9",
+          "0873",
+          "08B6",
+          "0BAC",
+          "0DDA"
+        ]
+      }
+    },
+    "service_addresses": {
+      "0634": {
+        "read": 0,
+        "write": 1,
+        "services": [
+          "INT21/AH=47 current directory"
+        ]
+      },
+      "0635": {
+        "read": 0,
+        "write": 1,
+        "services": [
+          "INT21/AH=47 current directory"
+        ]
+      },
+      "0675": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "0676": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "0677": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "0678": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "0679": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "067A": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "067B": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "067C": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "067D": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "06BE": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "06BF": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "06C0": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "06C1": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "06C2": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "06C3": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      },
+      "06C4": {
+        "read": 1,
+        "write": 0,
+        "services": [
+          "INT21/AH=4E search specification"
+        ]
+      }
+    }
+  },
+  "output": "\r\nBad Path Name !\r\n",
+  "final_sorted_records": [],
+  "event_counts": {
+    "bios": 20,
+    "dos": 11,
+    "find_end": 3,
+    "find_specification": 2,
+    "instruction": 2,
+    "output": 19,
+    "terminate": 1
+  },
+  "events": [
+    {
+      "kind": "instruction",
+      "address": "06F2",
+      "size": 2,
+      "regs": {
+        "ax": 0,
+        "bx": 0,
+        "cx": 0,
+        "dx": 0,
+        "si": 0,
+        "di": 0,
+        "ip": 1778,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "0702",
+      "ah": 37,
+      "al": 35,
+      "regs": {
+        "ax": 9507,
+        "bx": 0,
+        "cx": 0,
+        "dx": 2500,
+        "si": 0,
+        "di": 0,
+        "ip": 1796,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "bios",
+      "site": "0709",
+      "ah": 8,
+      "al": 35,
+      "regs": {
+        "ax": 2083,
+        "bx": 7,
+        "cx": 0,
+        "dx": 2500,
+        "si": 0,
+        "di": 0,
+        "ip": 1803,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "0713",
+      "ah": 51,
+      "al": 0,
+      "regs": {
+        "ax": 13056,
+        "bx": 7,
+        "cx": 0,
+        "dx": 2500,
+        "si": 0,
+        "di": 0,
+        "ip": 1813,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "071F",
+      "ah": 51,
+      "al": 1,
+      "regs": {
+        "ax": 13057,
+        "bx": 7,
+        "cx": 0,
+        "dx": 2304,
+        "si": 0,
+        "di": 0,
+        "ip": 1825,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "0764",
+      "ah": 47,
+      "al": 1,
+      "regs": {
+        "ax": 12033,
+        "bx": 7,
+        "cx": 22,
+        "dx": 0,
+        "si": 129,
+        "di": 0,
+        "ip": 1894,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "077A",
+      "ah": 25,
+      "al": 0,
+      "regs": {
+        "ax": 6400,
+        "bx": 1333,
+        "cx": 22,
+        "dx": 0,
+        "si": 129,
+        "di": 0,
+        "ip": 1916,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "instruction",
+      "address": "0788",
+      "size": 3,
+      "regs": {
+        "ax": 6467,
+        "bx": 1333,
+        "cx": 22,
+        "dx": 0,
+        "si": 129,
+        "di": 0,
+        "ip": 1928,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "0791",
+      "ah": 26,
+      "al": 0,
+      "regs": {
+        "ax": 6656,
+        "bx": 1333,
+        "cx": 22,
+        "dx": 1333,
+        "si": 129,
+        "di": 0,
+        "ip": 1939,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "079D",
+      "ah": 78,
+      "al": 0,
+      "regs": {
+        "ax": 19968,
+        "bx": 1333,
+        "cx": 8,
+        "dx": 1726,
+        "si": 129,
+        "di": 0,
+        "ip": 1951,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "find_specification",
+      "specification": "C:\\*.*",
+      "matches": []
+    },
+    {
+      "kind": "find_end",
+      "function": 78
+    },
+    {
+      "kind": "dos",
+      "site": "07B1",
+      "ah": 79,
+      "al": 18,
+      "regs": {
+        "ax": 20242,
+        "bx": 1333,
+        "cx": 11,
+        "dx": 1726,
+        "si": 1363,
+        "di": 672,
+        "ip": 1971,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "find_end",
+      "function": 79
+    },
+    {
+      "kind": "dos",
+      "site": "07DB",
+      "ah": 71,
+      "al": 45,
+      "regs": {
+        "ax": 18221,
+        "bx": 1333,
+        "cx": 0,
+        "dx": 1536,
+        "si": 1588,
+        "di": 1588,
+        "ip": 2013,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "dos",
+      "site": "095A",
+      "ah": 78,
+      "al": 0,
+      "regs": {
+        "ax": 19968,
+        "bx": 1333,
+        "cx": 241,
+        "dx": 1653,
+        "si": 1662,
+        "di": 548,
+        "ip": 2396,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "find_specification",
+      "specification": "C:\\\\\\*.*",
+      "matches": []
+    },
+    {
+      "kind": "find_end",
+      "function": 78
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 13,
+      "regs": {
+        "ax": 3597,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 273,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 13
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 10,
+      "regs": {
+        "ax": 3594,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 274,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 10
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 66,
+      "regs": {
+        "ax": 3650,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 275,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 66
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 97,
+      "regs": {
+        "ax": 3681,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 276,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 97
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 100,
+      "regs": {
+        "ax": 3684,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 277,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 100
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 32,
+      "regs": {
+        "ax": 3616,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 278,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 32
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 80,
+      "regs": {
+        "ax": 3664,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 279,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 80
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 97,
+      "regs": {
+        "ax": 3681,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 280,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 97
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 116,
+      "regs": {
+        "ax": 3700,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 281,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 116
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 104,
+      "regs": {
+        "ax": 3688,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 282,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 104
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 32,
+      "regs": {
+        "ax": 3616,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 283,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 32
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 78,
+      "regs": {
+        "ax": 3662,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 284,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 78
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 97,
+      "regs": {
+        "ax": 3681,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 285,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 97
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 109,
+      "regs": {
+        "ax": 3693,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 286,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 109
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 101,
+      "regs": {
+        "ax": 3685,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 287,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 101
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 32,
+      "regs": {
+        "ax": 3616,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 288,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 32
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 33,
+      "regs": {
+        "ax": 3617,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 289,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 33
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 13,
+      "regs": {
+        "ax": 3597,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 290,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 13
+    },
+    {
+      "kind": "bios",
+      "site": "0DD3",
+      "ah": 14,
+      "al": 10,
+      "regs": {
+        "ax": 3594,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 291,
+        "di": 548,
+        "ip": 3541,
+        "sp": 65530
+      }
+    },
+    {
+      "kind": "output",
+      "char": 10
+    },
+    {
+      "kind": "dos",
+      "site": "09EC",
+      "ah": 0,
+      "al": 0,
+      "regs": {
+        "ax": 0,
+        "bx": 7,
+        "cx": 241,
+        "dx": 1653,
+        "si": 291,
+        "di": 548,
+        "ip": 2542,
+        "sp": 65534
+      }
+    },
+    {
+      "kind": "terminate",
+      "code": 0
+    }
+  ]
+}
