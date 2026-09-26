@@ -13,6 +13,29 @@ unsupported behavior raises an error rather than being guessed.
 .venv/bin/python simulator/test_suite.py
 ```
 
+For a quiet, interactive-style run against a Unix directory, use the
+filesystem wrapper:
+
+```sh
+.venv/bin/python simulator/run_filesystem.py /path/to/directory
+.venv/bin/python simulator/run_filesystem.py /path/to/directory \
+    --command-tail 'C:\\DOCS\\*.TXT'
+```
+
+The selected Unix directory is mounted as emulated `C:\`. With no command
+tail, D.COM lists the mounted current directory. The wrapper reuses the same
+Unicorn CPU and DOS service model but disables instruction tracing, coverage,
+event logs, and record snapshots; it writes only the program's screen output.
+BIOS screen-window and cursor-position calls are emitted as ANSI cursor
+controls. The screen-window clear operation is deliberately reduced to a
+cursor move so the listing remains visible after the simulated Enter key. Use
+`--plain` to obtain the older linear teletype-character stream instead.
+It imports regular files and directories recursively, using Unix size and
+modification time for the DOS DTA. Symlinks, device files, sockets, FIFOs,
+non-ASCII names, and names that do not fit the simple 8.3 representation are
+ignored deliberately. This is a DOS-shaped demonstration view, not a full
+Unix-to-DOS compatibility layer.
+
 The default fixture supplies three synthetic directory entries. The harness
 records DOS/BIOS calls, DTA contents, writes to the temporary/sorted record
 areas, marked-string output, and termination.

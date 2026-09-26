@@ -116,6 +116,30 @@ reads.
   observations support reconstruction of this program, not proof of behavior
   on every DOS version or filesystem.
 
+### Unix-backed demonstration mode
+
+[`simulator/run_filesystem.py`](simulator/run_filesystem.py) reuses the CPU
+and DOS emulation layer as a quiet runtime wrapper. It mounts a selected Unix
+directory as emulated `C:\`, imports regular files and directories, and runs
+the original `D.COM` without trace or coverage output:
+
+```sh
+.venv/bin/python simulator/run_filesystem.py /path/to/directory
+```
+
+The default output translates the program's BIOS screen-window and cursor
+positioning calls to ANSI cursor controls. Screen clearing is simplified to a
+cursor move so the listing remains visible after the simulated Enter key. Use
+`--plain` for a linear teletype stream.
+
+The view is intentionally simplified: symlinks, special files, non-ASCII
+names, and names that do not fit DOS 8.3 syntax are ignored. Unix file sizes
+and modification times are converted into the DOS DTA fields. A DOS command
+tail can be supplied with `--command-tail`; the default lists the mounted
+current directory.
+
+![Sample run with simulator](Kaypro_D_test.png "Sample run")
+
 ## Final status
 
 The byte-level reconstruction is complete and reproducible. The remaining
