@@ -33,7 +33,7 @@ PSP_MEMORY_LIMIT equ 0x0006
 PSP_DEFAULT_FCB_DRIVE equ 0x005C
 PSP_COMMAND_TAIL_LENGTH equ 0x0080
 PSP_COMMAND_TAIL_TEXT equ 0x0081
-RECORD_STORAGE equ 0x0DDB
+DOS_DATE_BASE_YEAR equ 1980
 
 ; Entry and initialized data.
 entry:
@@ -56,27 +56,42 @@ insufficient_memory_prefix:
 invalid_drive_text:
     db "Invalid Drive specified.", 0x0D, 0x8A ; load 01D0h-01E9h
     db "Invalid Directory Specification.", 0x0D, 0x8A ; load 01EAh-020Bh
-directory_heading_text:
-    db " Directory of                                                                 ", 0x0D, 0x0A ; load 020Ch-025Bh
-    db "      Dir's and        Files Occupy               Bytes on Volume:             ", 0x0D, 0x0A ; load 025Ch-02ACh
+directory_heading_text:                                                                              ; load 020Ch-021Ah
+    db " Directory of  "
+directory_name_display_field:                                                                        ; load 021Bh-025Bh
+    db "                                                               ", 0x0D, 0x0A
+directory_count_display_field:                                                                       ; load 025Ch-026Ch
+    db "      Dir's and  "
+file_count_display_field:                                                                            ; load 026Dh-027Fh
+    db "      Files Occupy "
+total_bytes_display_field:                                                                           ; load 0280h-029Fh
+    db "              Bytes on Volume:  "
+volume_label_display_field:
+    db "           ", 0x0D, 0x0A                                                                     ; load 02A0h-02ACh
     db " ==============================================================================", 0x0D, 0x0A ; load 02ADh-02FDh
-    db " File    .Ext   KBytes  mm-dd-yy hh:mm | File    .Ext   KBytes  mm-dd-yy hh:mm", 0x0D, 0x0A ; load 02FEh-034Dh
+    db " File    .Ext   KBytes  mm-dd-yy hh:mm | File    .Ext   KBytes  mm-dd-yy hh:mm", 0x0D, 0x0A  ; load 02FEh-034Dh
     db " --------------------------------------|---------------------------------------", 0x0D, 0x8A ; load 034Eh-039Eh
 equals_separator_totals_text:
     db " ==============================================================================", 0x0D, 0x0A ; load 039Fh-03EFh
-    db "                    Bytes Free of                           Bytes Total", 0x0D, 0x0A ; load 03F0h-0438h
+    db "      "                                                                                      ; load 03F0h-03F5h
+bytes_free_display_field:
+    db "              Bytes Free of             "                                                    ; load 03F6h-041Dh
+bytes_total_display_field:
+    db "              Bytes Total", 0x0D, 0x0A                                                       ; load 041Eh-0438h
     db " ------------------------------------------------------------------------------", 0x0D, 0x0A ; load 0439h-0488h
-    db " ==>      Continue =  CR                         Abort =  ^C       ", 0xA0 ; load 048Ah-04CDh
-directory_row_buffer:
-    ; load 04CEh-04F4h: reusable left directory row field.
-    times 35 db 0x20
+    db " ==>      Continue =  CR                         Abort =  ^C       ", 0xA0                   ; load 048Ah-04CDh
+directory_row_buffer:                                ; load 04CEh
+    db 0x20
+directory_row_buffer_sub:                            ; load 04Cfh-04F4h: reusable left directory row field.
+    times 34 db 0x20                              
     db 0x3A, 0x20, 0x20, 0x20
 left_column_end_marker:
     db 0x7C                      ; load 04F5h; overwritten with 0xFCh before output
     db 0x20                      ; load 04F6h; separator spacing
-right_column_buffer:
-    ; load 04F7h-051Bh: reusable right directory row field.
-    times 34 db 0x20
+right_column_buffer:             ; load 04F7h-04FFh: reusable right directory row field.
+    times 9 db 0x20
+right_column_buffer_sub1:        ; load 0500h-051Bh:
+    times 25 db 0x20
     db 0x3A
     times 2 db 0x20
 right_column_end_marker:
@@ -84,14 +99,14 @@ right_column_end_marker:
 ; Runtime variables begin at load 051Dh. The surrounding
 ; storage is initialized in the image but is mostly populated during startup.
 runtime_variables:                  ; load 051Dh-0534h: mutable startup state
-RECORD_STORAGE_END:
+RECORD_STORAGE_END:                 ; load 051Dh-051Eh
     db 0x00, 0x00
-RECORD_CAPACITY_BYTES:
+RECORD_CAPACITY_BYTES:              ; load 051Fh-0520h
     db 0x00, 0x00
-NEXT_RECORD_POINTER:
+NEXT_RECORD_POINTER:                ; load 0521h-0524h
     db 0xDB, 0x0D
     db 0x00, 0x00
-SAVED_CTRL_BREAK_STATE:
+SAVED_CTRL_BREAK_STATE:             ; load 0525h
     db 0x00
 COMMAND_TAIL_END:
     db 0x00, 0x00
@@ -111,11 +126,19 @@ DISPLAY_RECORD_COUNT:
     db 0x00, 0x00
 DIRECTORY_COUNT:
     db 0x00, 0x00
-PROGRAM_DTA:                       ; load 0535h-055Fh: DOS find-result area
+PROGRAM_DTA:                       ; load 0535h-0549h: DOS find-result area
     times 21 db 0x00
-PROGRAM_DTA_ATTRIBUTE:
-    times 9 db 0x00
-PROGRAM_DTA_NAME:
+PROGRAM_DTA_ATTRIBUTE:             ; load 054Ah
+    db 0x00
+PROGRAM_DTA_ATTRIBUTE_SUB1:        ; load 054Bh-054Ch
+    db 0x00
+    db 0x00
+PROGRAM_DTA_ATTRIBUTE_SUB2:        ; load 054Dh-054Eh
+    db 0x00
+    db 0x00
+PROGRAM_DTA_ATTRIBUTE_SUB3:        ; load 054Fh-0552h
+    times 4 db 0x00
+PROGRAM_DTA_NAME:                  ; load 0553h-055Fh
     times 13 db 0x00
 DTA_ADJACENT_WORKSPACE:             ; load 0560h-05B4h: untouched DOS-adjacent workspace
     times 85 db 0x00
@@ -127,7 +150,7 @@ RECORD_CAPACITY:
     db 0x00, 0x00
 TOTAL_BYTES_LOW:
     db 0x00, 0x00
-TOTAL_BYTES_HIGH:
+TOTAL_BYTES_HIGH:                   ; load 05BDh-05BEh
     db 0x00, 0x00
 TEMPORARY_RECORD:                   ; load 05BFh-05D6h: 22-byte sort candidate
     times 24 db 0x00
@@ -152,6 +175,7 @@ PATH_BUFFER:                       ; load 0634h-0674h: DOS current-directory buf
     times 65 db 0x00
 CURRENT_SEARCH_PATH:
     db 0x58, 0x3A, 0x5C
+CURRENT_SEARCH_PATH_SUFFIX:
     times 64 db 0x00
 SEARCH_PATH_END_POINTER:
     db 0x00, 0x00
@@ -175,21 +199,20 @@ SPECIAL_TABLE_LENGTH:
 SPECIAL_TABLE:
     db 0x22, 0x2F, 0x3C, 0x3E, 0x5B, 0x5C, 0x5D, 0x7C
 CHARACTER_MAPPING_TABLE:
-    db 0x00, 0x2E, 0x21
-    db 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2D, 0x5E, 0x5F, 0x60, 0x7B, 0x7D, 0x7E, 0x00
-    db 0x00
-    db 0x00, 0x00, 0x00, 0xDB, 0x0D
+	db 0x00, 0x2E, 0x21, 0x23, 0x24, 0x25, 0x26, 0x27
+	db 0x28, 0x29, 0x2D, 0x5E, 0x5F, 0x60, 0x7B, 0x7D
+	db 0x7E, 0x00, 0x00, 0x00, 0x00, 0x00, 0xDB, 0x0D
 ; load 06F2h: confirmed executable entry
-code:
-main_initialize_and_dispatch:
+code:                               ; load 06F2h
+main_initialize_and_dispatch:      ; load 06F2h
     cmp al, 0xFF
     jnz main_normal_initialize
     mov al, 0x0F                 ; error selector, not DOS AH=00h itself
     jmp report_error             ; AL=0Fh selects the error/exit message
-main_normal_initialize:
+main_normal_initialize:             ; load 06FBh
     mov ah, DOS_SET_INTERRUPT_VECTOR
     mov al, 0x23                 ; Ctrl-C / Ctrl-Break vector
-    mov dx, 0x09C4               ; DS:DX = replacement handler
+    mov dx, ctrl_break_handler   ; DS:DX = replacement handler
     int 0x21                     ; installs the program's Ctrl-C handler
     mov ah, BIOS_READ_CHAR_ATTRIBUTE
     mov bx, 0x0007               ; BH=display page 7; BL is ignored by AH=08h
@@ -198,7 +221,7 @@ main_normal_initialize:
     mov ah, DOS_CTRL_BREAK
     mov al, DOS_CTRL_BREAK_GET
     int 0x21                     ; returns Ctrl-Break state in DL
-    mov [0x0525], dl
+    mov [SAVED_CTRL_BREAK_STATE], dl
     mov ah, DOS_CTRL_BREAK
     mov al, DOS_CTRL_BREAK_SET
     mov dl, 0x00                 ; disable Ctrl-Break checking during setup
@@ -242,13 +265,13 @@ main_normal_initialize:
     mov ah, DOS_GET_CURRENT_DRIVE
     int 0x21                     ; returns zero-based current drive in AL
     inc al
-main_drive_already_selected:
+main_drive_already_selected:        ; load 077Eh
     add al, 0x40                 ; convert 1-based drive number to ASCII
     mov [SEARCH_SPECIFICATION], al ; search path drive letter
     mov [CURRENT_SEARCH_PATH], al  ; displayed/current drive letter
     nop
     nop
-enumerate_directory_entries:
+enumerate_directory_entries:        ; load 0788h
     mov dx, PROGRAM_DTA
     mov ax, cs
     mov es, ax
@@ -260,28 +283,28 @@ enumerate_directory_entries:
     mov cx, 0x0008
     mov ah, DOS_FIND_FIRST
     int 0x21                    ; DS:DX = CS:06BEh, CX = 0008h attributes
-enumerate_search_record_setup:
+enumerate_search_record_setup:      ; load 079Fh
     mov cx, 0x000B
     mov si, PROGRAM_DTA_NAME
-    mov di, 0x02A0
+    mov di, volume_label_display_field
     cmp byte [PROGRAM_DTA_ATTRIBUTE], 0x08
     jz enumerate_directory_continue_target
     mov ah, DOS_FIND_NEXT
     int 0x21                    ; continues the search using the installed DTA
-enumerate_directory_continue:
+enumerate_directory_continue:       ; load 07B3h
     jc enumerate_no_more_entries
     jmp short enumerate_search_record_setup
     nop
     nop
-enumerate_no_more_entries:
+enumerate_no_more_entries:           ; load 07B9h
     mov al, 0x2D                 ; display a dash when enumeration ends
     jmp short enumerate_fill_name_padding
-enumerate_directory_continue_target:
+enumerate_directory_continue_target: ; load 07BDh
     cld
     lodsb
     cmp al, 0x2E
     jz enumerate_directory_continue_target
-enumerate_copy_name_character:
+enumerate_copy_name_character:      ; load 07C3h
     stosb
     cmp al, 0x00
     loopne enumerate_directory_continue_target
@@ -289,10 +312,10 @@ enumerate_copy_name_character:
     dec di
     inc cx
     mov al, 0x20
-enumerate_fill_name_padding:
+enumerate_fill_name_padding:        ; load 07CEh
     rep stosb
-enumerate_prepare_path:
-enumerate_pad_name:
+enumerate_prepare_path:             ; load 07D0h
+enumerate_pad_name:                 ; load 07D0h
     mov si, PATH_BUFFER
     mov ah, DOS_GET_CURRENT_DIRECTORY
     db 0x8B, 0xFE                ; mov di, si (original encoding)
@@ -303,7 +326,7 @@ enumerate_pad_name:
     dec ah
     mov cx, 0x0040
     cld
-enumerate_find_path_end:
+enumerate_find_path_end:            ; load 07E7h
     inc ah
     scasb
     loopne enumerate_find_path_end
@@ -311,26 +334,26 @@ enumerate_find_path_end:
     mov ah, 0x01
     mov cx, 0x0046
     mov si, PSP_COMMAND_TAIL_TEXT
-enumerate_first_command_scan:
+enumerate_first_command_scan:       ; load 07F7h
     mov al, [si]
     call classify_command_character
     jnz enumerate_first_command_unrecognized
     call delete_command_character
     loop enumerate_first_command_scan
-enumerate_first_command_unrecognized:
+enumerate_first_command_unrecognized: ; load 0803h
     cmp byte [PSP_DEFAULT_FCB_DRIVE], 0x00
     jz enumerate_after_first_command_scan
     call delete_command_character
     call delete_command_character
     mov ah, 0x01
     mov cx, 0x0046
-enumerate_second_command_scan:
+enumerate_second_command_scan:      ; load 0815h
     mov al, [si]
     call classify_command_character
     jnz enumerate_after_first_command_scan
     call delete_command_character
     loop enumerate_second_command_scan
-enumerate_after_first_command_scan:
+enumerate_after_first_command_scan: ; load 0821h
     cmp byte [si], 0x2E
     jnz enumerate_option_scan
     cmp byte [si+0x01], 0x2E
@@ -340,12 +363,12 @@ enumerate_after_first_command_scan:
     jnz enumerate_parent_directory_ready
     mov al, 0x0F
     jmp report_error             ; invalid parent-directory request
-enumerate_parent_directory_ready:
+enumerate_parent_directory_ready:   ; load 083Ah
     push si
     mov si, PATH_BUFFER
     db 0x32, 0xFF                ; xor bh, bh (original encoding)
     mov ah, 0x02
-enumerate_parent_directory_scan:
+enumerate_parent_directory_scan:    ; load 0842h
     dec bx
     mov al, [bx+si]
     call classify_command_character
@@ -353,45 +376,45 @@ enumerate_parent_directory_scan:
     jz enumerate_parent_directory_done
     db 0x0B, 0xDB                ; or bx, bx (original encoding)
     jnz enumerate_parent_directory_scan
-enumerate_parent_directory_done:
+enumerate_parent_directory_done:    ; load 0851h
     mov [si-0x01], bl
     pop si
-enumerate_single_dot_command:
+enumerate_single_dot_command:       ; load 0855h
     call delete_command_character
     ; fall through to the common second deletion
-enumerate_non_parent_command:
+enumerate_non_parent_command:       ; load 0858h
     call delete_command_character
     mov ah, 0x01
     mov cx, 0x0046
-enumerate_third_command_scan:
+enumerate_third_command_scan:       ; load 0860h
     mov al, [si]
     call classify_command_character
     jnz enumerate_non_parent_done
     call delete_command_character
     loop enumerate_third_command_scan
-enumerate_non_parent_done:
-enumerate_option_scan:
+enumerate_non_parent_done:          ; load 086Ch
+enumerate_option_scan:              ; load 086Ch
     mov ah, 0x02
     mov cx, 0x0046
-enumerate_option_character:
+enumerate_option_character:         ; load 0871h
     mov al, [si]
     call classify_command_character
     jnz construct_search_path_and_check_attributes
     mov ah, 0x00
-enumerate_option_loop_body:
+enumerate_option_loop_body:         ; load 087Ah
     call delete_command_character
     mov al, [si]
     call classify_command_character
     loope enumerate_option_loop_body
-enumerate_command_end:
-    mov di, 0x0678
+enumerate_command_end:              ; load 0884h
+    mov di, CURRENT_SEARCH_PATH_SUFFIX
     cmp byte [PSP_COMMAND_TAIL_LENGTH], 0x00
     jz enumerate_no_command_tail
     jmp short enumerate_command_tail_present
     nop
-enumerate_no_command_tail:
+enumerate_no_command_tail:          ; load 0891h
     jmp construct_path_append_search_star ; existing path-building continuation
-classify_command_character:
+classify_command_character:         ; load 0894h
     push ax
     push cx
     push di
@@ -401,24 +424,24 @@ classify_command_character:
     mov di, SEPARATOR_TABLE
     mov cl, [SEPARATOR_TABLE_LENGTH]
     jmp classify_scan
-classify_secondary_table:
+classify_secondary_table:           ; load 08A7h
     mov di, SPECIAL_TABLE
     mov cl, [SPECIAL_TABLE_LENGTH]
-classify_scan:
+classify_scan:                      ; load 08AEh
     cld
     repne scasb
     jcxz classify_not_found
-classify_restore_return:
+classify_restore_return:            ; load 08B3h
     pop di
     pop cx
     pop ax
     ret
-classify_not_found:
+classify_not_found:                 ; load 08B7h
     db 0x0A, 0xE4                  ; or ah, ah (original encoding)
     jnz classify_restore_return
     inc ah
     jmp classify_secondary_table
-delete_command_character:
+delete_command_character:            ; load 08BFh
     push cx
     push si
     push di
@@ -433,13 +456,13 @@ delete_command_character:
     pop si
     pop cx
     ret
-construct_search_path_and_check_attributes:
+construct_search_path_and_check_attributes: ; load 08D4h
     mov si, PATH_BUFFER
     mov ah, [si-1]
     cmp byte [PSP_COMMAND_TAIL_LENGTH], 0x00
     jnz construct_path_copy_tail
     db 0x0A, 0xE4                  ; or ah, ah (original encoding)
-    mov di, 0x0678
+    mov di, CURRENT_SEARCH_PATH_SUFFIX
     jz construct_path_append_search_star
     db 0x33, 0xC9                  ; xor cx, cx (original encoding)
     db 0x8A, 0xCC                  ; mov cl, ah (original encoding)
@@ -447,17 +470,17 @@ construct_search_path_and_check_attributes:
     mov byte [di], 0x5C
     inc di
     jmp construct_path_append_search_star
-construct_path_copy_tail:
+construct_path_copy_tail:            ; load 08F4h
     db 0x0A, 0xE4                  ; or ah, ah (original encoding)
-    mov di, 0x0678
+    mov di, CURRENT_SEARCH_PATH_SUFFIX
     jz construct_path_copy_command
     db 0x33, 0xC9                  ; xor cx, cx (original encoding)
     db 0x8A, 0xCC                  ; mov cl, ah (original encoding)
     rep movsb
     mov byte [di], 0x5C
     inc di
-enumerate_command_tail_present:
-construct_path_copy_command:
+enumerate_command_tail_present:     ; load 0905h
+construct_path_copy_command:        ; load 0905h
     mov si, PSP_COMMAND_TAIL_TEXT
     db 0x33, 0xC9                  ; xor cx, cx (original encoding)
     mov cl, [si-1]
@@ -470,10 +493,10 @@ construct_path_copy_command:
     jc construct_path_finish
     test cl, 0x10
     jz construct_path_finish
-construct_path_append_separator:
+construct_path_append_separator:     ; load 0923h
     mov byte [di], 0x5C
     inc di
-construct_path_append_search_star:
+construct_path_append_search_star:   ; load 0927h
     mov byte [di], 0x2A
     inc di
     mov byte [di], 0x2E
@@ -482,19 +505,19 @@ construct_path_append_search_star:
     inc di
     mov byte [di], 0x00
     mov [SEARCH_PATH_END_POINTER], di
-construct_path_finish:
-directory_processing_start:
+construct_path_finish:               ; load 093Ah
+directory_processing_start:          ; load 093Ah
     mov di, CURRENT_SEARCH_PATH  ; current/display drive path
     db 0x8B, 0xF7                ; mov si, di (original encoding)
     db 0x33, 0xC0                ; xor ax, ax (original encoding)
     mov cx, 0x0050
-directory_find_drive_end:
+directory_find_drive_end:            ; load 0944h
     inc ah
     scasb
     loopne directory_find_drive_end
     db 0x33, 0xC9                ; xor cx, cx (original encoding)
     db 0x8A, 0xCC                ; mov cl, ah (original encoding)
-    mov di, 0x021B
+    mov di, directory_name_display_field
     rep movsb                     ; copy drive/path prefix to display buffer
     mov dx, CURRENT_SEARCH_PATH
     mov ah, DOS_FIND_FIRST
@@ -502,15 +525,15 @@ directory_find_drive_end:
     int 0x21                     ; DS:DX=search path, returns first DTA record
     jnc directory_first_entry_found
     jmp report_error             ; no matching file/path error
-directory_first_entry_found:
+directory_first_entry_found:         ; load 0961h
     call ingest_dta_record
     mov si, TEMPORARY_RECORD
     mov di, RECORD_STORAGE
     mov cx, 0x000B
     rep movsw                     ; copy the 22-byte temporary record
-    db 0x83, 0x06, 0x21, 0x05, 0x16 ; add word [0521h],16h (original encoding)
+    db 0x83, 0x06, 0x21, 0x05, 0x16 ; add word [NEXT_RECORD_POINTER],16h (original encoding)
     dec word [REMAINING_RECORD_CAPACITY]
-directory_find_next:
+directory_find_next:                 ; load 0978h
     mov ah, DOS_FIND_NEXT
     int 0x21                     ; returns the next matching DTA record
     jc directory_enumeration_done
@@ -518,20 +541,20 @@ directory_find_next:
     call insert_or_reject_sorted_record
     dec word [REMAINING_RECORD_CAPACITY]
     jnz directory_find_next
-directory_enumeration_done:
+directory_enumeration_done:          ; load 098Ah
     cmp al, 0x12                 ; DOS error 12h: no more files
     jz directory_display_summary
     jmp report_error
-directory_display_summary:
+directory_display_summary:           ; load 0991h
     call print_summary_totals
     call calculate_volume_totals
     mov ax, [RECORD_COUNT]
     mov [DISPLAY_RECORD_COUNT], ax ; total record count for display
     mov ax, RECORD_STORAGE
     mov [DISPLAY_RECORD_POINTER], ax ; reset display record pointer
-directory_render_again:
+directory_render_again:              ; load 09A3h
     call render_directory_screen
-directory_wait_for_input:
+directory_wait_for_input:            ; load 09A6h
     mov ah, BIOS_SET_CURSOR
     mov bx, 0x0007
     mov dh, 0x1A
@@ -539,14 +562,14 @@ directory_wait_for_input:
     int 0x10                     ; position cursor below the directory listing
     call wait_for_enter_or_abort
     jmp short directory_render_again
-directory_abort_screen:
+directory_abort_screen:              ; load 09B6h
     mov ah, BIOS_SET_CURSOR
     mov bx, 0x0007
     mov dh, 0x1A
     mov dl, 0x00
     int 0x10
     call wait_for_enter_or_abort
-ctrl_break_handler:
+ctrl_break_handler:                  ; load 09C4h
     mov ax, 0x0600               ; BIOS scroll-up, AL=00h clear window
     mov bh, [SAVED_VIDEO_ATTRIBUTE] ; saved screen attribute
     mov bl, 0x07
@@ -562,11 +585,12 @@ ctrl_break_handler:
     mov al, DOS_CTRL_BREAK_SET
     mov dl, [SAVED_CTRL_BREAK_STATE] ; restore the caller's Ctrl-Break state
     int 0x21
+terminate_program:
     db 0x33, 0xC0                ; xor ax, ax (original encoding)
     int 0x21                     ; terminate through DOS AH=00h
     nop
     nop
-ingest_dta_record:
+ingest_dta_record:                   ; load 09F0h
     cld
     mov si, PROGRAM_DTA_ATTRIBUTE
     mov di, TEMPORARY_RECORD
@@ -580,23 +604,23 @@ ingest_dta_record:
     db 0x32, 0xC0                  ; xor al, al (original encoding)
     dec word [FILE_COUNT]
     inc word [DIRECTORY_COUNT]
-ingest_not_directory:
+ingest_not_directory:                ; load 0A13h
     stosb
     mov si, PROGRAM_DTA_NAME
     mov cx, 0x000D
-ingest_name_loop:
+ingest_name_loop:                    ; load 0A1Ah
     lodsb
     cmp al, 0x61
     jc ingest_name_character_ready
     cmp al, 0x7B
     jnc ingest_name_character_scan
     sub al, 0x20
-ingest_name_character_ready:
+ingest_name_character_ready:         ; load 0A25h
     cmp al, 0x30
     jc ingest_name_character_scan
     cmp al, 0x5B
     jc ingest_name_character_done
-ingest_name_character_scan:
+ingest_name_character_scan:          ; load 0A2Dh
     push di
     push cx
     mov di, CHARACTER_MAPPING_TABLE
@@ -608,37 +632,37 @@ ingest_name_character_scan:
     add cx, 0x0012
     db 0x8A, 0xC1                  ; mov al, cl (original encoding)
     jmp ingest_store_character
-ingest_unknown_character:
+ingest_unknown_character:            ; load 0A43h
     dec di
     stosb
     mov al, 0x12
-ingest_store_character:
+ingest_store_character:              ; load 0A47h
     pop cx
     pop di
-ingest_name_character_done:
+ingest_name_character_done:          ; load 0A49h
     stosb
     loop ingest_name_loop
-    mov si, 0x054F
+    mov si, PROGRAM_DTA_ATTRIBUTE_SUB3
     lodsw
     stosw
     add word [TOTAL_BYTES_LOW], ax
     lodsw
     stosw
     adc word [TOTAL_BYTES_HIGH], ax
-    mov si, 0x054D
+    mov si, PROGRAM_DTA_ATTRIBUTE_SUB2
     movsw
-    mov si, 0x054B
+    mov si, PROGRAM_DTA_ATTRIBUTE_SUB1
     movsw
     ret
-insert_or_reject_sorted_record:
+insert_or_reject_sorted_record:      ; load 0A64h
     cld
-    mov di, 0x0DDB
+    mov di, RECORD_STORAGE
     mov [COMPARISON_POINTER], di
     mov cx, [RECORD_COUNT]
-insert_scan_records:
+insert_scan_records:                 ; load 0A70h
     mov si, TEMPORARY_RECORD
     mov ah, 0x0E
-insert_compare_loop:
+insert_compare_loop:                 ; load 0A75h
     dec ah
     jz insert_at_position
     cmpsb
@@ -648,14 +672,14 @@ insert_compare_loop:
     mov di, [COMPARISON_POINTER]
     dec cx
     jnz insert_scan_records
-insert_copy_record:
+insert_copy_record:                  ; load 0A8Ah
     mov si, TEMPORARY_RECORD
-    mov di, [0x0521]
+    mov di, [NEXT_RECORD_POINTER]
     mov cx, 0x000B
     rep movsw
-    mov [0x0521], di
+    mov [NEXT_RECORD_POINTER], di
     ret
-insert_at_position:
+insert_at_position:                  ; load 0A9Bh
     neg cx
     add cx, [RECORD_COUNT]
     shl cx, 1
@@ -666,17 +690,17 @@ insert_at_position:
     db 0x03, 0xC1                  ; add ax, cx (original encoding)
     shl cx, 1
     db 0x03, 0xC8                  ; add cx, ax (original encoding)
-    add cx, 0x0DDB
+    add cx, RECORD_STORAGE
     mov [INSERTION_DESTINATION_POINTER], cx
     neg cx
-    add cx, [0x0521]
+    add cx, [NEXT_RECORD_POINTER]
     shr cx, 1
-    mov di, [0x0521]
+    mov di, [NEXT_RECORD_POINTER]
     db 0x8B, 0xF7                  ; mov si, di (original encoding)
     dec si
     dec si
     add di, 0x0016
-    mov [0x0521], di
+    mov [NEXT_RECORD_POINTER], di
     dec di
     dec di
     std
@@ -687,7 +711,7 @@ insert_at_position:
     mov cx, 0x000B
     rep movsw
     ret
-calculate_volume_totals:
+calculate_volume_totals:             ; load 0AE3h
     mov ah, BIOS_SET_CURSOR
     mov dh, 0x15
     mov dl, 0x00
@@ -711,7 +735,7 @@ calculate_volume_totals:
     db 0x8B, 0xD0                  ; mov dx, ax (original encoding)
     db 0x8B, 0xC6                  ; mov ax, si (original encoding)
     mov cx, 0x000D
-    mov di, 0x03F6
+    mov di, bytes_free_display_field
     call format_decimal_with_commas
     pop ax
     pop cx
@@ -725,12 +749,12 @@ calculate_volume_totals:
     db 0x8B, 0xD0                  ; mov dx, ax (original encoding)
     db 0x8B, 0xC6                  ; mov ax, si (original encoding)
     mov cx, 0x000D
-    mov di, 0x041E
+    mov di, bytes_total_display_field
     call format_decimal_with_commas
     mov si, equals_separator_totals_text
     call bios_output_marked_string
     ret
-print_summary_totals:
+print_summary_totals:                ; load 0B3Ch
     mov ah, BIOS_SCROLL_UP
     db 0x32, 0xC0                  ; xor al, al (original encoding)
     mov bh, 0x0E
@@ -745,22 +769,22 @@ print_summary_totals:
     db 0x33, 0xD2                  ; xor dx, dx (original encoding)
     mov ax, [DIRECTORY_COUNT]
     mov cx, 0x0005
-    mov di, 0x025C
+    mov di, directory_count_display_field
     call format_decimal_with_commas
     db 0x33, 0xD2                  ; xor dx, dx (original encoding)
     mov ax, [FILE_COUNT]
     mov cx, 0x0005
-    mov di, 0x026D
+    mov di, file_count_display_field
     call format_decimal_with_commas
-    db 0x8B, 0x16, 0xBD, 0x05      ; mov dx, [0x05BD] (original encoding)
+    db 0x8B, 0x16, 0xBD, 0x05      ; mov dx, [TOTAL_BYTES_HIGH] (original encoding)
     mov ax, [TOTAL_BYTES_LOW]
     mov cx, 0x000D
-    mov di, 0x0280
+    mov di, total_bytes_display_field
     call format_decimal_with_commas
     mov si, directory_heading_text
     call bios_output_marked_string
     ret
-report_error:
+report_error:                        ; load 0B86h
     cmp al, 0x02
     mov si, file_not_found_prefix
     jz report_error_print
@@ -777,32 +801,32 @@ report_error:
     mov si, invalid_drive_text
     jz report_error_print
     mov si, bad_path_name_prefix
-report_error_print:
+report_error_print:                  ; load 0BACh
     call bios_output_marked_string
-    jmp 0x09EA
-wait_for_enter_or_abort:
+    jmp terminate_program
+wait_for_enter_or_abort:             ; load 0BB2h
     mov ah, DOS_DIRECT_CONSOLE_INPUT
     int 0x21                    ; returns an unechoed key in AL
     cmp al, 0x03
     jnz wait_for_enter
-    jmp 0x09C4
-wait_for_enter:
+    jmp ctrl_break_handler
+wait_for_enter:                      ; load 0BBDh
     cmp al, 0x0D
     jnz wait_for_enter_or_abort
     ret
-render_directory_screen:
+render_directory_screen:             ; load 0BC2h
     mov ax, BIOS_SCROLL_UP << 8
     mov bh, 0x71
-    mov cx, 0x0500
+    mov cx, right_column_buffer_sub1
     mov dh, 0x14
     mov dl, 0x4F
     int 0x10                    ; AL=00h, BH=71h, CX=0500h, DX=144Fh clears window
     mov ah, BIOS_SET_CURSOR
     mov bx, 0x0007
-    mov dx, 0x0500
+    mov dx, right_column_buffer_sub1
     int 0x10                    ; BH=07h, DX=0500h positions the heading
     mov cx, 0x000F
-render_left_rows:
+render_left_rows:                    ; load 0BDDh
     push cx
     call render_left_entry
     mov si, initial_line_break_marker
@@ -814,7 +838,7 @@ render_left_rows:
     mov cx, 0x0010
     mov dh, 0x05
     mov dl, 0x29
-render_right_rows:
+render_right_rows:                   ; load 0BF7h
     push dx
     push cx
     push bx
@@ -827,28 +851,28 @@ render_right_rows:
     inc dh
     loop render_right_rows
     ret
-render_left_entry:
-    mov di, 0x04CF
+render_left_entry:                  ; load 0C09h
+    mov di, directory_row_buffer_sub
     call format_directory_record
-    mov byte [0x04F5], 0xFC
-    mov si, 0x04CE
+    mov byte [left_column_end_marker], 0xFC
+    mov si, directory_row_buffer
     call bios_output_marked_string
     add word [DISPLAY_RECORD_POINTER], 0x0016
     dec word [DISPLAY_RECORD_COUNT]
     jz render_right_last
     ret
-render_right_entry:
-    mov di, 0x04F7
+render_right_entry:                 ; load 0C26h
+    mov di, right_column_buffer
     call format_directory_record
-    mov si, 0x04F7
+    mov si, right_column_buffer
     call bios_output_marked_string
     add word [DISPLAY_RECORD_POINTER], 0x0016
     dec word [DISPLAY_RECORD_COUNT]
     jz render_right_last
     ret
-render_right_last:
-    jmp 0x09B6
-format_decimal_with_commas:
+render_right_last:                  ; load 0C3Eh
+    jmp directory_abort_screen
+format_decimal_with_commas:          ; load 0C41h
     mov byte [FORMAT_FIELD_STATE], 0x03
     push bx
     push cx
@@ -859,7 +883,7 @@ format_decimal_with_commas:
     std
     db 0x03, 0xF9                  ; add di, cx (original encoding)
     dec di
-format_decimal_digit:
+format_decimal_digit:               ; load 0C52h
     db 0x33, 0xD2                  ; xor dx, dx (original encoding)
     db 0x8B, 0xC6                  ; mov ax, si (original encoding)
     div word [SIZE_OR_DATE_DIVISOR]
@@ -873,7 +897,7 @@ format_decimal_digit:
     mov byte [di], 0x2C
     dec di
     dec cx
-format_decimal_no_separator:
+format_decimal_no_separator:         ; load 0C75h
     dec byte [FORMAT_FIELD_STATE]
     add dl, 0x30
     mov [di], dl
@@ -883,13 +907,13 @@ format_decimal_no_separator:
     jcxz format_decimal_done
     mov al, 0x20
     rep stosb
-format_decimal_done:
+format_decimal_done:                ; load 0C89h
     pop si
     pop di
     pop cx
     pop bx
     ret
-format_directory_record:
+format_directory_record:            ; load 0C8Eh
     mov [FORMAT_RECORD_POINTER], di
     mov cx, 0x0025
     mov al, 0x20
@@ -907,14 +931,14 @@ format_directory_record:
     jc format_record_directory_marker
     mov al, 0x2E
     stosb
-format_record_directory_marker:
+format_record_directory_marker:     ; load 0CB3h
     mov al, 0x2E
     stosb
     jmp format_record_directory_output
-format_record_name:
+format_record_name:                 ; load 0CB8h
     mov bx, CHARACTER_MAPPING_TABLE
     mov cx, 0x0008
-format_record_name_loop:
+format_record_name_loop:             ; load 0CBEh
     cmp al, 0x41
     jnc format_record_lowercase
     cmp al, 0x30
@@ -925,31 +949,31 @@ format_record_name_loop:
     mov al, 0x20
     rep stosb
     jmp format_record_name_done
-format_record_lowercase:
+format_record_lowercase:             ; load 0CD1h
     add al, 0x20
-format_record_copy_char:
+format_record_copy_char:             ; load 0CD3h
     stosb
     lodsb
     db 0x0A, 0xC0                  ; or al, al (original encoding)
     jz format_record_no_size
     loop format_record_name_loop
-format_record_name_done:
+format_record_name_done:             ; load 0CDBh
     mov al, 0x2E
     stosb
     mov cx, 0x0003
     lodsb
     jmp format_record_name_loop
-format_record_no_size:
+format_record_no_size:               ; load 0CE4h
     cmp byte [FORMAT_RECORD_ATTRIBUTE], 0x00
     jnz format_record_date_time
-format_record_directory_output:
+format_record_directory_output:      ; load 0CEBh
     mov di, [FORMAT_RECORD_POINTER]
     add di, 0x0011
     mov si, subdir_text
     mov cx, 0x000B
     rep movsb
     ret
-format_record_date_time:
+format_record_date_time:             ; load 0CFBh
     mov di, [FORMAT_RECORD_POINTER]
     add di, 0x000F
     mov si, [DISPLAY_RECORD_POINTER]
@@ -974,7 +998,7 @@ format_record_date_time:
     jz format_record_date_done
     db 0x05, 0x01, 0x00           ; add ax, 0x0001 (original encoding)
     adc dx, 0x0000
-format_record_date_done:
+format_record_date_done:             ; load 0D32h
     mov cx, 0x0006
     call format_decimal_with_commas
     cld
@@ -989,7 +1013,7 @@ format_record_date_done:
     shr bh, 1
     db 0x8A, 0xC4                  ; mov al, ah (original encoding)
     cbw
-    add ax, 0x07BC
+    add ax, DOS_DATE_BASE_YEAR
     push ax
     db 0x8A, 0xC7                  ; mov al, bh (original encoding)
     cbw
@@ -1037,14 +1061,14 @@ format_record_date_done:
     call format_decimal_with_commas
     call replace_leading_space_with_zero
     ret
-replace_leading_space_with_zero:
+replace_leading_space_with_zero:     ; load 0DAEh
     mov al, [di]
     cmp al, 0x20
     jnz leading_space_done
     mov byte [di], 0x30
-leading_space_done:
+leading_space_done:                 ; load 0DB7h
     ret
-bios_output_character:
+bios_output_character:               ; load 0DB8h
     push bx
     mov ah, BIOS_TTY_OUTPUT
     mov bx, 0x0007
@@ -1056,7 +1080,7 @@ bios_output_character:
     pop cx
     pop bx
     ret
-bios_output_marked_string:
+bios_output_marked_string:           ; load 0DC8h
     cld
     cs lodsb
     mov ah, BIOS_TTY_OUTPUT
@@ -1068,5 +1092,5 @@ bios_output_marked_string:
     and al, 0x80
     jz bios_output_marked_string
     ret
-sorted_record_storage:                ; load 0DDBh-0EDFh: sorted records/free space
+RECORD_STORAGE:                 ; load 0DDBh-0EDFh: sorted records/free space
     times 261 db 0x00
